@@ -139,6 +139,7 @@ cwd = os.getcwd()
 stamp = datetime.datetime.now().strftime("%Y_%M_%d_%H:%M:%S")
 
 docwd = os.path.join(cwd, "html")
+scriptsdir = os.path.realpath('../')
 
 template = os.path.join(cwd, "web.tpl")
 template2_header = os.path.join(cwd, "index_header.txt")
@@ -151,6 +152,9 @@ os.mkdir(docwd)
 
 
 ignore = [".git", ".ipynb_checkpoints", "scripts"]
+
+print('docwd: '+str(docwd))
+print('scriptsdir: '+str(scriptsdir))
 	
 try:
 	os.chdir("../../")
@@ -158,7 +162,7 @@ try:
 	_toc = toc.get_toc()
 	
 	wd = os.getcwd()
-	shutil.copytree(os.path.join(wd,"images"), os.path.join(docwd,"images"))
+	#shutil.copytree(os.path.join(wd,"images"), os.path.join(docwd,"images"))
 	
 	for (path, folders, files) in os.walk("."):
 		#for (path, folders, files) in sortedWalk("."):
@@ -184,15 +188,15 @@ try:
 
 		os.chdir(os.path.join(docwd, path))
 		
-		with open("web_changed.tpl", "w") as ofile:
-			with fileinput.FileInput(template) as ifile:
-				for line in ifile:
-					if line.strip() == "%%%%TOC_REPLACE%%%%":
-						ofile.write(make_toc(cwd, os.path.relpath(docwd), _toc))
-					elif line.strip() == "%%%%LEARN_REPLACE%%%%":
-						ofile.write("<li><a title='Online material to learn laser interferometry with Finesse' href='{0}/index.html'>Learn</a>\n".format(os.path.relpath(docwd)))
-					else:
-						ofile.write(line)
+		#with open("web_changed.tpl", "w") as ofile:
+		#	with fileinput.FileInput(template) as ifile:
+		#		for line in ifile:
+		#			if line.strip() == "%%%%TOC_REPLACE%%%%":
+		#				ofile.write(make_toc(cwd, os.path.relpath(docwd), _toc))
+		#			elif line.strip() == "%%%%LEARN_REPLACE%%%%":
+		#				ofile.write("<li><a title='Online material to learn laser interferometry with Finesse' href='{0}/index.html'>Learn</a>\n".format(os.path.relpath(docwd)))
+		#			else:
+		#				ofile.write(line)
 		
 		for f in files:
 			if f.startswith("."):
@@ -261,22 +265,45 @@ try:
 				
 			elif curfolder != ".":
 				# convert notebook to HTML
-				shutil.copy(os.path.join(wd, path, f), ".")
 				
-				try:
-					subprocess.call(["jupyter", "nbconvert", f, "--to", "HTML", "--template", "web_changed.tpl"])
-				except FileNotFoundError:
-					subprocess.call(["jupyter-nbconvert-3.4", f, "--to", "HTML", "--template", "web_changed.tpl"])
+				shutil.copy(os.path.join(wd, path, f), ".")
+				# Don't actually need that file
+				
+				subprocess.call(["jupyter-nbconvert", f, "--to", "HTML",
+								"--TemplateExporter.extra_template_basedirs="+str(scriptsdir),
+				                 "--template", "gwoptics"])
 				
 				# clean up
 				os.remove(f)
+				shutil.move(f[:-5]+'html', f[:-5]+'php')
 		
 		if os.path.exists("web_changed.tpl"):
 			os.remove("web_changed.tpl")
 				
 		os.chdir(wd)
-		
-		
-				
+
+	print('Conversion complete.')
+	phpdir = os.path.realpath('/var/www/gwoptics-web/learn')
+	resp = input('Would you like to deploy to '+phpdir+' [y/n]')
+	
+	def ensure_trailing(stringin):
+		return stringin.strip().rstrip('/')+'/'
+
+	if resp.lower().strip() in ['y','yes']:
+		docwd = ensure_trailing(docwd)
+		phpdir = ensure_trailing(phpdir)
+
+		args = ["cp", "-r", docwd+'*', phpdir]
+		args_str = ' '.join([str(_) for _ in args])
+		print('Executing: '+args_str)
+		p = subprocess.call(args_str,shell=True)
+		if p != 0:
+			print('cp failed, trying with sudo')
+			args.insert(0,'sudo')
+			p = subprocess.call(args_str,shell=True)
+		if p == 0:
+			print('Moved.')
+		else:
+			print('Failed')
 finally:
 	os.chdir(cwd)
