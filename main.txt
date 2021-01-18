@@ -2,15 +2,17 @@
 <h1 class="title">Learn Laser Interferometry</h1>
 <h2 id="subtitle">A self-study course on interferometry for
 precision measurements,<br /> using Python notebooks and <span style="font-variant: small-caps;">Finesse</span>.</h2>
-<img class="portrait" src="images/daniel_icon01.png" alt=""/>
-<img class="portrait" src="images/danielt_icon01.png" alt=""/>
-<img class="portrait" src="images/andreas_icon01.png" alt=""/>
-<div class="tportrait">
-Daniel Töyrä<br/>
-Daniel Brown<br/>
-Andreas Freise<br/>
-and others <br/>
-since 2016
+<div class="tportrait_contain">
+	<img class="portrait" src="images/daniel_icon01.png" alt=""/>
+	<img class="portrait" src="images/danielt_icon01.png" alt=""/>
+	<img class="portrait" src="images/andreas_icon01.png" alt=""/>
+	<div class="tportrait">
+	Daniel Töyrä<br/>
+	Daniel Brown<br/>
+	Andreas Freise<br/>
+	and others <br/>
+	since 2016
+	</div>
 </div>
 <p>
 This page provides resources and self-study material on laser
