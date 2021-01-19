@@ -135,6 +135,15 @@ def make_section_toc(_chapter, _section, wdir, relpath, _toc):
 	
 	return rtn
 
+def html_redirect(location):
+	return '''<html>
+<head>
+<meta http-equiv="refresh" content="5;url={0}" />
+</head>
+This content has moved to <a href="{0}">{0}</a>. You will be redirected to in 5 seconds.
+</html>'''.format(location)
+
+
 p = re.compile("^\d{2}_")
 
 cwd = os.getcwd()
@@ -227,6 +236,8 @@ try:
 					template = Template(f.read())
 				with open("index.php", "w") as ofile:
 					ofile.write(template.render(title=title,content=content))
+				with open('index.html','w') as ofile:
+					ofile.write(html_redirect('index.php'))
 							
 			elif not f.endswith(".ipynb") and curfolder != ".":
 				shutil.copy(os.path.join(wd, path, f), ".")
@@ -248,6 +259,8 @@ try:
 				# clean up
 				os.remove(f)
 				shutil.move(f[:-5]+'html', f[:-5]+'php')
+				with open(f[:-5]+'html','w') as ofile:
+					ofile.write(html_redirect(f[:-5]+'php'))
 				
 		os.chdir(wd)
 
