@@ -24,8 +24,9 @@ href="https://www.gwoptics.org/pykat">PyKat</a>.
 </p>
 
 <h2>Table of Contents</h2>
+<div id="learntoc">
 %%%%TOC_REPLACE%%%% 
-
+</div>
 <h1>Schools and Workshops</h1>
 <p>
 Notebooks generated from this course have been used for in-person
