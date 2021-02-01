@@ -2,15 +2,17 @@
 <h1 class="title">Learn Laser Interferometry</h1>
 <h2 id="subtitle">A self-study course on interferometry for
 precision measurements,<br /> using Python notebooks and <span style="font-variant: small-caps;">Finesse</span>.</h2>
-<img class="portrait" src="images/daniel_icon01.png" alt=""/>
-<img class="portrait" src="images/danielt_icon01.png" alt=""/>
-<img class="portrait" src="images/andreas_icon01.png" alt=""/>
-<div class="tportrait">
-Daniel Töyrä<br/>
-Daniel Brown<br/>
-Andreas Freise<br/>
-and others <br/>
-since 2016
+<div class="tportrait_contain">
+	<img class="portrait" src="images/daniel_icon01.png" alt=""/>
+	<img class="portrait" src="images/danielt_icon01.png" alt=""/>
+	<img class="portrait" src="images/andreas_icon01.png" alt=""/>
+	<div class="tportrait">
+	Daniel Töyrä<br/>
+	Daniel Brown<br/>
+	Andreas Freise<br/>
+	and others <br/>
+	since 2016
+	</div>
 </div>
 <p>
 This page provides resources and self-study material on laser
@@ -22,8 +24,9 @@ href="https://www.gwoptics.org/pykat">PyKat</a>.
 </p>
 
 <h2>Table of Contents</h2>
+<div id="learntoc">
 %%%%TOC_REPLACE%%%% 
-
+</div>
 <h1>Schools and Workshops</h1>
 <p>
 Notebooks generated from this course have been used for in-person
@@ -63,12 +66,21 @@ further installation instructions are provided in the file
 edit the notebooks and do your own simulation tasks.</li>
 </ul>
 
-<div class="gwimglinks">
-<a href="images/notebook_screenshot1.png"><img style="margin-right:2em;box-shadow: 5px 5px 5px #888888;" src="images/notebook_screenshot1_thumbnail.png" alt="screenshot of IPython notebooks from this course"/></a>
-<a href="images/notebook_screenshot2.png"><img style="box-shadow: 5px 5px 5px #888888;" src="images/notebook_screenshot2_thumbnail.png" alt="screenshot of IPython notebooks from this course"/></a>
+<div class="box_focus850">
+  <div class="twocol">
+    <a href="images/notebook_screenshot1.png">
+      <img class="gwscreenshot" src="images/notebook_screenshot1_thumbnail.png" alt="screenshot of IPython notebooks from this course"/>
+    </a>
+  </div>
+  <div class="twocol">
+    <a href="images/notebook_screenshot2.png">
+      <img  class="gwscreenshot" src="images/notebook_screenshot2_thumbnail.png" alt="screenshot of IPython notebooks from this course"/>
+    </a>
+  </div>
+  <div class="clear"></div>
+  <div class="gwcaption">Screen-shots of IPython notebooks from this course.</div>
 </div>
-<div class="gwcaption">Screen-shots of IPython notebooks from this course.
-</div>
+<div class="clear"></div>
  
 <h2 class="subsection">License</h2>
 <p>

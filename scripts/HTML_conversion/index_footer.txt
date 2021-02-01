@@ -1,8 +1,0 @@
-</div>
-</div>
-<div style="clear: both;">&nbsp;</div>
-<div id="gwfooter">
-<p id="gwlegal">&copy; Andreas Freise 2009 onwards. The css design is based on a free template from <a href="http://www.freecsstemplates.org/">Free CSS Templates</a>.</p>
-</div>
-</div>
-</html>
